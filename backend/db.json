@@ -1,0 +1,605 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Táo Fuji",
+      "price": 50000,
+      "description": "Táo Fuji ngọt, giòn, giàu dinh dưỡng",
+      "imageUrl": "https://link-to-image.com/tao-fuji.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false,
+      "discountPrice": 45000
+    },
+    {
+      "id": "2",
+      "name": "Xoài Cát Hòa Lộc",
+      "price": 75000,
+      "description": "Xoài Cát Hoà Lộc ngọt thơm, chín mọng, là lựa chọn tuyệt vời cho mùa hè",
+      "imageUrl": "https://link-to-image.com/xoai-cat-hoa-loc.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 70000
+    },
+    {
+      "id": "3",
+      "name": "Dưa Hấu",
+      "price": 30000,
+      "description": "Dưa hấu ngọt mát, thích hợp giải nhiệt ngày hè",
+      "imageUrl": "https://link-to-image.com/dua-hau.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 25000
+    },
+    {
+      "id": "4",
+      "name": "Nho Mỹ Đỏ",
+      "price": 120000,
+      "description": "Nho Mỹ Đỏ ngọt và không hạt, giàu chất chống oxy hóa",
+      "imageUrl": "https://link-to-image.com/nho-my-do.jpg",
+      "category": "Trái cây nhập khẩu",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "5",
+      "name": "Chuối Laba",
+      "price": 25000,
+      "description": "Chuối Laba thơm ngon, giàu dinh dưỡng",
+      "imageUrl": "https://link-to-image.com/chuoi-laba.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "6",
+      "name": "Cam Sành",
+      "price": 35000,
+      "description": "Cam Sành nhiều nước, giàu vitamin C",
+      "imageUrl": "https://link-to-image.com/cam-sanh.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 30000
+    },
+    {
+      "id": "7",
+      "name": "Ổi Nữ Hoàng",
+      "price": 45000,
+      "description": "Ổi Nữ Hoàng giòn ngọt, giàu chất xơ",
+      "imageUrl": "https://link-to-image.com/oi-nu-hoang.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 40000
+    },
+    {
+      "id": "8",
+      "name": "Bưởi Da Xanh",
+      "price": 80000,
+      "description": "Bưởi Da Xanh ngọt mát, nhiều nước",
+      "imageUrl": "https://link-to-image.com/buoi-da-xanh.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "9",
+      "name": "Mãng Cầu Xiêm",
+      "price": 65000,
+      "description": "Mãng cầu xiêm chua ngọt, bổ dưỡng",
+      "imageUrl": "https://link-to-image.com/mang-cau-xiem.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 60000
+    },
+    {
+      "id": "10",
+      "name": "Dừa Xiêm",
+      "price": 30000,
+      "description": "Dừa xiêm ngọt mát, giải nhiệt tốt",
+      "imageUrl": "https://link-to-image.com/dua-xiem.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "11",
+      "name": "Dâu Tây Đà Lạt",
+      "price": 150000,
+      "description": "Dâu tây đỏ mọng, chua ngọt hài hòa",
+      "imageUrl": "https://link-to-image.com/dau-tay-da-lat.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 140000
+    },
+    {
+      "id": "12",
+      "name": "Thanh Long Ruột Đỏ",
+      "price": 45000,
+      "description": "Thanh long ruột đỏ giàu vitamin",
+      "imageUrl": "https://link-to-image.com/thanh-long-ruot-do.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 40000
+    },
+    {
+      "id": "13",
+      "name": "Mít Thái",
+      "price": 55000,
+      "description": "Mít Thái thơm lừng, ngọt đậm",
+      "imageUrl": "https://link-to-image.com/mit-thai.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "14",
+      "name": "Quýt Hồng Lai Vung",
+      "price": 70000,
+      "description": "Quýt Hồng ngọt dịu, mọng nước",
+      "imageUrl": "https://link-to-image.com/quyt-hong-lai-vung.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": true,
+      "discountPrice": 65000
+    },
+    {
+      "id": "15",
+      "name": "Vú Sữa Lò Rèn",
+      "price": 85000,
+      "description": "Vú Sữa Lò Rèn ngọt thơm, giàu dưỡng chất",
+      "imageUrl": "https://link-to-image.com/vu-sua-lo-ren.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 80000
+    },
+    {
+      "id": "16",
+      "name": "Na Dai",
+      "price": 60000,
+      "description": "Na Dai ngọt thanh, thơm mát",
+      "imageUrl": "https://link-to-image.com/na-dai.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "17",
+      "name": "Sầu Riêng Ri6",
+      "price": 180000,
+      "description": "Sầu Riêng Ri6 ngọt béo, đậm đà",
+      "imageUrl": "https://link-to-image.com/sau-rieng-ri6.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 170000
+    },
+    {
+      "id": "18",
+      "name": "Chôm Chôm Thái",
+      "price": 55000,
+      "description": "Chôm Chôm Thái ngọt thanh, mọng nước",
+      "imageUrl": "https://link-to-image.com/chom-chom-thai.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "19",
+      "name": "Mận Hậu Sơn La",
+      "price": 40000,
+      "description": "Mận Hậu ngọt giòn, thơm ngon",
+      "imageUrl": "https://link-to-image.com/man-hau.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 35000
+    },
+    {
+      "id": "20",
+      "name": "Táo Xanh Mỹ",
+      "price": 60000,
+      "description": "Táo Xanh giòn ngọt, giàu vitamin",
+      "imageUrl": "https://link-to-image.com/tao-xanh-my.jpg",
+      "category": "Trái cây nhập khẩu",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "21",
+      "name": "Lê Nam Phi",
+      "price": 85000,
+      "description": "Lê Nam Phi giòn, thơm và mọng nước",
+      "imageUrl": "https://link-to-image.com/le-nam-phi.jpg",
+      "category": "Trái cây nhập khẩu",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 80000
+    },
+    {
+      "id": "22",
+      "name": "Kiwi Xanh New Zealand",
+      "price": 95000,
+      "description": "Kiwi Xanh chua ngọt, giàu dinh dưỡng",
+      "imageUrl": "https://link-to-image.com/kiwi-xanh.jpg",
+      "category": "Trái cây nhập khẩu",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "23",
+      "name": "Dưa Lưới Nhật",
+      "price": 120000,
+      "description": "Dưa Lưới Nhật ngọt thơm, hương vị thanh nhã",
+      "imageUrl": "https://link-to-image.com/dua-luoi-nhat.jpg",
+      "category": "Trái cây nhập khẩu",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 115000
+    },
+    {
+      "id": "24",
+      "name": "Măng Cụt",
+      "price": 65000,
+      "description": "Măng Cụt thơm ngon, bổ dưỡng",
+      "imageUrl": "https://link-to-image.com/mang-cut.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "25",
+      "name": "Vải Thiều Lục Ngạn",
+      "price": 70000,
+      "description": "Vải Thiều ngọt thơm, mọng nước",
+      "imageUrl": "https://link-to-image.com/vai-thieu.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 65000
+    },
+    {
+      "id": "26",
+      "name": "Nhãn Xuồng Cơm Vàng",
+      "price": 50000,
+      "description": "Nhãn ngọt thanh, hương vị đặc biệt",
+      "imageUrl": "https://link-to-image.com/nhan.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "27",
+      "name": "Cam Cara Úc",
+      "price": 90000,
+      "description": "Cam ngọt dịu, chứa nhiều vitamin C",
+      "imageUrl": "https://link-to-image.com/cam-cara.jpg",
+      "category": "Trái cây nhập khẩu",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 85000
+    },
+    {
+      "id": "28",
+      "name": "Dâu Tằm",
+      "price": 60000,
+      "description": "Dâu Tằm chua ngọt, giàu chất chống oxy hóa",
+      "imageUrl": "https://link-to-image.com/dau-tam.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": true,
+      "isOnSale": false
+    },
+    {
+      "id": "29",
+      "name": "Đu Đủ Ruột Đỏ",
+      "price": 30000,
+      "description": "Đu Đủ Ruột Đỏ ngọt mềm, nhiều chất xơ",
+      "imageUrl": "https://link-to-image.com/du-du.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 28000
+    },
+    {
+      "id": "30",
+      "name": "Quả Phật Thủ",
+      "price": 80000,
+      "description": "Quả Phật Thủ thơm, thường dùng trong trang trí",
+      "imageUrl": "https://link-to-image.com/phat-thu.jpg",
+      "category": "Trái cây",
+      "inStock": true,
+      "isBestSeller": false,
+      "isOnSale": true,
+      "discountPrice": 75000
+    }
+  ],
+  "orders": [
+    {
+      "id": "25ec",
+      "items": [
+        {
+          "id": "14",
+          "name": "Quýt Hồng Lai Vung",
+          "price": 65000,
+          "imageUrl": "https://link-to-image.com/quyt-hong-lai-vung.jpg",
+          "quantity": 1
+        }
+      ],
+      "total": 65000,
+      "address": "",
+      "paymentMethod": "credit",
+      "date": "11/11/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "901c",
+      "items": [
+        {
+          "id": "4",
+          "name": "Nho Mỹ Đỏ",
+          "price": 120000,
+          "imageUrl": "https://link-to-image.com/nho-my-do.jpg",
+          "quantity": 1
+        }
+      ],
+      "total": 120000,
+      "address": "tghjkl",
+      "paymentMethod": "credit",
+      "date": "11/11/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "f091",
+      "items": [
+        {
+          "id": "9",
+          "name": "Mãng Cầu Xiêm",
+          "price": 65000,
+          "description": "Mãng cầu xiêm chua ngọt, bổ dưỡng",
+          "imageUrl": "https://link-to-image.com/mang-cau-xiem.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": false,
+          "isOnSale": true,
+          "discountPrice": 60000,
+          "quantity": 1
+        }
+      ],
+      "total": 65000,
+      "address": "",
+      "paymentMethod": "credit",
+      "date": "11/11/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "b458",
+      "items": [
+        {
+          "id": "2",
+          "name": "Xoài Cát Hòa Lộc",
+          "price": 75000,
+          "description": "Xoài Cát Hoà Lộc ngọt thơm, chín mọng, là lựa chọn tuyệt vời cho mùa hè",
+          "imageUrl": "https://link-to-image.com/xoai-cat-hoa-loc.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": false,
+          "isOnSale": true,
+          "discountPrice": 70000,
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "name": "Dưa Hấu",
+          "price": 30000,
+          "description": "Dưa hấu ngọt mát, thích hợp giải nhiệt ngày hè",
+          "imageUrl": "https://link-to-image.com/dua-hau.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": false,
+          "isOnSale": true,
+          "discountPrice": 25000,
+          "quantity": 2
+        }
+      ],
+      "total": 135000,
+      "address": "",
+      "paymentMethod": "credit",
+      "date": "11/11/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "eebf",
+      "items": [
+        {
+          "id": "2",
+          "name": "Xoài Cát Hòa Lộc",
+          "price": 75000,
+          "description": "Xoài Cát Hoà Lộc ngọt thơm, chín mọng, là lựa chọn tuyệt vời cho mùa hè",
+          "imageUrl": "https://link-to-image.com/xoai-cat-hoa-loc.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": false,
+          "isOnSale": true,
+          "discountPrice": 70000,
+          "quantity": 2
+        },
+        {
+          "id": "1",
+          "name": "Táo Fuji",
+          "price": 50000,
+          "description": "Táo Fuji ngọt, giòn, giàu dinh dưỡng",
+          "imageUrl": "https://link-to-image.com/tao-fuji.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": true,
+          "isOnSale": false,
+          "discountPrice": 45000,
+          "quantity": 1
+        }
+      ],
+      "total": 200000,
+      "address": "",
+      "paymentMethod": "credit",
+      "date": "11/13/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "98e4",
+      "items": [
+        {
+          "id": "3",
+          "name": "Dưa Hấu",
+          "price": 30000,
+          "description": "Dưa hấu ngọt mát, thích hợp giải nhiệt ngày hè",
+          "imageUrl": "https://link-to-image.com/dua-hau.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": false,
+          "isOnSale": true,
+          "discountPrice": 25000,
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "name": "Xoài Cát Hòa Lộc",
+          "price": 75000,
+          "description": "Xoài Cát Hoà Lộc ngọt thơm, chín mọng, là lựa chọn tuyệt vời cho mùa hè",
+          "imageUrl": "https://link-to-image.com/xoai-cat-hoa-loc.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": false,
+          "isOnSale": true,
+          "discountPrice": 70000,
+          "quantity": 1
+        }
+      ],
+      "total": 105000,
+      "address": "",
+      "paymentMethod": "credit",
+      "date": "11/13/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "19fa",
+      "items": [
+        {
+          "id": "2",
+          "name": "Xoài Cát Hòa Lộc",
+          "price": 75000,
+          "description": "Xoài Cát Hoà Lộc ngọt thơm, chín mọng, là lựa chọn tuyệt vời cho mùa hè",
+          "imageUrl": "https://link-to-image.com/xoai-cat-hoa-loc.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": false,
+          "isOnSale": true,
+          "discountPrice": 70000,
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "name": "Dưa Hấu",
+          "price": 30000,
+          "description": "Dưa hấu ngọt mát, thích hợp giải nhiệt ngày hè",
+          "imageUrl": "https://link-to-image.com/dua-hau.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": false,
+          "isOnSale": true,
+          "discountPrice": 25000,
+          "quantity": 1
+        }
+      ],
+      "total": 105000,
+      "address": "",
+      "paymentMethod": "credit",
+      "date": "11/13/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "1cdc",
+      "items": [
+        {
+          "id": "1",
+          "name": "Táo Fuji",
+          "price": 50000,
+          "description": "Táo Fuji ngọt, giòn, giàu dinh dưỡng",
+          "imageUrl": "https://link-to-image.com/tao-fuji.jpg",
+          "category": "Trái cây",
+          "inStock": true,
+          "isBestSeller": true,
+          "isOnSale": false,
+          "discountPrice": 45000,
+          "quantity": 1
+        }
+      ],
+      "total": 50000,
+      "address": "",
+      "paymentMethod": "credit",
+      "date": "11/14/2024",
+      "status": "Đang xử lý"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "123123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "email": "user@gmail.com",
+      "password": "123456",
+      "role": "user"
+    },
+    {
+      "id": "a527",
+      "username": "hithaone",
+      "email": "phamthithuthao2819@gmail.com",
+      "password": "1234123",
+      "role": "user"
+    },
+    {
+      "/admin/products": "/products",
+      "id": "bdbd"
+    }
+  ]
+}
