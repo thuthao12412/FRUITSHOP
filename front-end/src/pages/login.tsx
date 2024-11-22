@@ -1,35 +1,87 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FaUser, FaLock, FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
 import axios from 'axios';
+import { setCartData, setUserId } from '../stores/slices/cartSlide';
+import { useDispatch } from 'react-redux';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const savedCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+        const savedTotalQuantity = JSON.parse(localStorage.getItem('cartTotalQuantity') || '0');
+        const savedTotalPrice = JSON.parse(localStorage.getItem('cartTotalPrice') || '0');
+
+        if (savedCartItems.length > 0 && authContext?.userId) {
+            dispatch(setCartData({
+                items: savedCartItems,
+                totalQuantity: savedTotalQuantity,
+                totalPrice: savedTotalPrice,
+                userId: authContext.userId,
+            }));
+        }
+    }, [authContext?.userId, dispatch]);
 
     const handleLogin = async (event: React.FormEvent) => {
         event.preventDefault();
+        setError('');
 
         try {
             const response = await axios.get(`http://localhost:5000/users?email=${email}&password=${password}`);
-
             if (response.data.length > 0) {
                 const user = response.data[0];
-                const role = user.role || 'user';  // Assuming role is saved in db.json
-    
-                authContext?.login(role, 'fake-jwt-token');  // Simulating a login
+                const role = user.role || 'user';
+                const userId = user.id;
+                const username = user.username || '';
+                const phone = user.phone || '';
+                const address = user.address || '';
+
+                authContext?.login(
+                    role,
+                    'fake-jwt-token',
+                    userId,
+                    email,
+                    username,
+                    phone,
+                    address,
+                    3600 // 1 hour expiry
+                );
+
+                // Synchronize user's cart
+                const fetchUserCart = async () => {
+                    try {
+                        const cartResponse = await axios.get(`http://localhost:5000/carts?userId=${userId}`);
+                        if (cartResponse.data) {
+                            dispatch(setCartData(cartResponse.data));
+                            localStorage.setItem('cartItems', JSON.stringify(cartResponse.data.items));
+                            localStorage.setItem('cartTotalQuantity', JSON.stringify(cartResponse.data.totalQuantity));
+                            localStorage.setItem('cartTotalPrice', JSON.stringify(cartResponse.data.totalPrice));
+                        }
+                    } catch (error) {
+                        console.error('Error fetching user cart:', error);
+                    }
+                };
+                fetchUserCart();
+
+                dispatch(setUserId(userId));
                 alert(`Đăng nhập thành công với vai trò ${role}`);
                 navigate('/');
             } else {
-                alert('Đăng nhập thất bại. Vui lòng kiểm tra email và mật khẩu.');
+                setError('Đăng nhập thất bại. Vui lòng kiểm tra email và mật khẩu.');
             }
         } catch (error) {
             console.error('Login error:', error);
+            setError('Đã xảy ra lỗi. Vui lòng thử lại sau.');
         }
     };
+
     const handleRegisterRedirect = () => {
         navigate('/register');
     };
@@ -38,12 +90,18 @@ const Login: React.FC = () => {
         <div className="auth-container">
             <div className="info-section">
                 <h2>Bạn mới đến?</h2>
-                <p>Chúng tôi cung cấp các loại trái cây tươi ngon nhất từ khắp nơi, đảm bảo chất lượng và dinh dưỡng tốt nhất cho bạn và gia đình.</p>
-                <button onClick={handleRegisterRedirect} className="toggle-button">ĐĂNG KÝ</button>
+                <p>
+                    Chúng tôi cung cấp các loại trái cây tươi ngon nhất từ khắp nơi, đảm bảo chất lượng và dinh dưỡng tốt nhất
+                    cho bạn và gia đình.
+                </p>
+                <button onClick={handleRegisterRedirect} className="toggle-button">
+                    ĐĂNG KÝ
+                </button>
             </div>
-            
+
             <div className="form-section">
                 <h2>Đăng Nhập</h2>
+                {error && <p className="error-message">{error}</p>}
                 <form className="auth-form" onSubmit={handleLogin}>
                     <div className="input-group">
                         <FaUser className="input-icon" />
@@ -67,7 +125,9 @@ const Login: React.FC = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <button type="submit" className="auth-button">ĐĂNG NHẬP</button>
+                    <button type="submit" className="auth-button">
+                        ĐĂNG NHẬP
+                    </button>
                 </form>
                 <p className="social-login-text">Hoặc đăng nhập bằng mạng xã hội</p>
                 <div className="social-icons">

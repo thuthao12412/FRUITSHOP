@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/productCard';
 import axios from 'axios';
 
@@ -8,80 +8,119 @@ interface Product {
   price: number;
   imageUrl: string;
   discountPrice?: number;
+  isBestSeller: boolean;
+  isOnSale: boolean;
 }
 
 const Home: React.FC = () => {
   const [bestSellers, setBestSellers] = useState<Product[]>([]);
   const [onSaleProducts, setOnSaleProducts] = useState<Product[]>([]);
-  const bestSellersRef = useRef<HTMLDivElement>(null);
-  const onSaleProductsRef = useRef<HTMLDivElement>(null);
+  const [currentBestSellerPage, setCurrentBestSellerPage] = useState(1);
+  const [currentOnSalePage, setCurrentOnSalePage] = useState(1);
+  const itemsPerPage = 10;
 
-  useEffect(() => {
-    const fetchBestSellers = async () => {
-      const response = await axios.get('http://localhost:5000/products?isBestSeller=true');
-      setBestSellers(response.data);
-    };
-
-    const fetchOnSaleProducts = async () => {
-      const response = await axios.get('http://localhost:5000/products?isOnSale=true');
-      setOnSaleProducts(response.data);
-    };
-
-    fetchBestSellers();
-    fetchOnSaleProducts();
-  }, []);
-
-  const scrollLeft = (ref: React.RefObject<HTMLDivElement>) => {
-    ref.current?.scrollBy({ left: -220, behavior: 'smooth' });
+  // Fetch products from the API
+  const fetchProducts = async () => {
+    try {
+      const responseBestSellers = await axios.get('http://localhost:5000/products?isBestSeller=true');
+      const responseOnSale = await axios.get('http://localhost:5000/products?isOnSale=true');
+      setBestSellers(responseBestSellers.data);
+      setOnSaleProducts(responseOnSale.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
   };
 
-  const scrollRight = (ref: React.RefObject<HTMLDivElement>) => {
-    ref.current?.scrollBy({ left: 220, behavior: 'smooth' });
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  // Paginate products
+  const paginatedBestSellers = bestSellers.slice(
+    (currentBestSellerPage - 1) * itemsPerPage,
+    currentBestSellerPage * itemsPerPage
+  );
+  const paginatedOnSaleProducts = onSaleProducts.slice(
+    (currentOnSalePage - 1) * itemsPerPage,
+    currentOnSalePage * itemsPerPage
+  );
+
+  const handleBestSellerPageChange = (page: number) => {
+    setCurrentBestSellerPage(page);
+  };
+
+  const handleOnSalePageChange = (page: number) => {
+    setCurrentOnSalePage(page);
   };
 
   return (
     <div className="home-page">
+      {/* Banner */}
       <section className="banner">
         <img src="https://via.placeholder.com/1200x400" alt="Banner" />
       </section>
+
+      {/* Sản phẩm bán chạy */}
       <section className="best-sellers">
-        <h2>Sản phẩm bán chạy</h2>
-        <div className="scroll-buttons">
-          <button className="scroll-button" onClick={() => scrollLeft(bestSellersRef)}>&#9664;</button>
-          <div className="product-list" ref={bestSellersRef}>
-            {bestSellers.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-          <button className="scroll-button" onClick={() => scrollRight(bestSellersRef)}>&#9654;</button>
+        <h2>Sản Phẩm Bán Chạy</h2>
+        <div className="products-grid">
+          {paginatedBestSellers.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+        {/* Pagination for Best Sellers */}
+        <div className="pagination">
+          {Array.from({ length: Math.ceil(bestSellers.length / itemsPerPage) }, (_, index) => (
+            <button
+              key={index}
+              className={`pagination-button ${index + 1 === currentBestSellerPage ? 'active' : ''}`}
+              onClick={() => handleBestSellerPageChange(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
         </div>
       </section>
+
+      {/* Sản phẩm đang giảm giá */}
       <section className="on-sale">
-        <h2>Sản phẩm đang giảm giá</h2>
-        <div className="scroll-buttons">
-          <button className="scroll-button" onClick={() => scrollLeft(onSaleProductsRef)}>&#9664;</button>
-          <div className="product-list" ref={onSaleProductsRef}>
-            {onSaleProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-          <button className="scroll-button" onClick={() => scrollRight(onSaleProductsRef)}>&#9654;</button>
+        <h2>Sản Phẩm Giảm Giá</h2>
+        <div className="products-grid">
+          {paginatedOnSaleProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+        {/* Pagination for On Sale Products */}
+        <div className="pagination">
+          {Array.from({ length: Math.ceil(onSaleProducts.length / itemsPerPage) }, (_, index) => (
+            <button
+              key={index}
+              className={`pagination-button ${index + 1 === currentOnSalePage ? 'active' : ''}`}
+              onClick={() => handleOnSalePageChange(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
         </div>
       </section>
+  
+
+
+      {/* About Section */}
       <section className="about-section">
-        <h2>VỀ CHÚNG TÔI</h2>
+        <h2>Về Chúng Tôi</h2>
         <div className="about-container">
           <div className="about-item">
-            <img src="icon1.png" alt="Pioneer Service Icon" className="about-icon" />
-            <p>Chúng tôi tự hào là thương hiệu tiên phong trong dịch vụ cung cấp sản phẩm và giải pháp trái cây tươi an toàn đến nhiều công ty và văn phòng.</p>
+            <img src="icon1.png" alt="Icon 1" />
+            <p>Chúng tôi cung cấp những sản phẩm trái cây tươi ngon nhất.</p>
           </div>
           <div className="about-item">
-            <img src="icon2.png" alt="Natural Product Icon" className="about-icon" />
-            <p>Ủng hộ nông sản Việt chất lượng, an toàn, canh tác bền vững, không hóa chất độc hại bảo vệ môi sinh là tiêu chí của chúng tôi.</p>
+            <img src="icon2.png" alt="Icon 2" />
+            <p>Luôn ưu tiên chất lượng và sức khỏe của khách hàng.</p>
           </div>
           <div className="about-item">
-            <img src="icon3.png" alt="Customer Satisfaction Icon" className="about-icon" />
-            <p>Tự tin, sáng tạo, hoạt động bền vững, luôn lắng nghe và sẵn sàng đem đến những trải nghiệm tốt nhất cho khách hàng.</p>
+            <img src="icon3.png" alt="Icon 3" />
+            <p>Cam kết bảo vệ môi trường và phát triển bền vững.</p>
           </div>
         </div>
       </section>

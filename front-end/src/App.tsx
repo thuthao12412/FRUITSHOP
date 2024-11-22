@@ -19,8 +19,9 @@ import AuthPage from './pages/authPage';
 import { AuthProvider } from './context/authContext';
 import Account from './pages/account';
 import Dashboard from './pages/admin/dashboard';
-import Users from './pages/admin/usersAdmin';
+import UsersAdmin from './pages/admin/usersAdmin';
 import ProductsAdmin from './pages/admin/productsAdmin';
+import OrdersAdmin from './pages/admin/ordersAdmin';
 
 const App: React.FC = () => {
     // Sử dụng useSelector để lấy các sản phẩm trong giỏ
@@ -39,7 +40,7 @@ const App: React.FC = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/products" element={<Products />} />
-                    <Route path="/product/:productId" element={<ProductDetail />} /> {/* Đường dẫn đến chi tiết sản phẩm */}
+                    <Route path="/product/:id" element={<ProductDetail />} /> {/* Đường dẫn đến chi tiết sản phẩm */}
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/contact" element={<Contact />} />
@@ -48,8 +49,9 @@ const App: React.FC = () => {
                     <Route path="/login" element={<Login />} />
 <Route path="/register" element={<Register />} />
 <Route path="/admin/dashboard" element={<Dashboard />} />
-                <Route path="/admin/productsadmin" element={<Products />} />
-                <Route path="/admin/users" element={<Users />} />
+<Route path="/admin/orders" element={<OrdersAdmin />} />
+                <Route path="/admin/productsadmin" element={<ProductsAdmin />} />
+                <Route path="/admin/users" element={<UsersAdmin />} />
                 </Routes>
             </main>
             <Footer />

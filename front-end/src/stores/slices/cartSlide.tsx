@@ -1,95 +1,97 @@
-// src/slices/cartSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store'; // Import RootState nếu bạn có cấu trúc store
 
 interface CartItem {
-    id: number;
-    name: string;
-    price: number;
-    imageUrl: string;
-    quantity: number;
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl?: string;
 }
 
 interface CartState {
-    items: CartItem[];
-    totalQuantity: number;
-    totalPrice: number;
+  items: CartItem[];
+  totalQuantity: number;
+  totalPrice: number;
+  userId: string | null;
 }
 
 const initialState: CartState = {
-    items: [],
-    totalQuantity: 0,
-    totalPrice: 0,
+  items: [],
+  totalQuantity: 0,
+  totalPrice: 0,
+  userId: null,
 };
 
+// The cart slice
 const cartSlice = createSlice({
-    name: 'cart',
-    initialState,
-    reducers: {
-        addItem: (state, action: PayloadAction<Omit<CartItem, 'quantity'> | CartItem>) => {
-            const newItem: CartItem = {
-                ...action.payload,
-                quantity: 'quantity' in action.payload ? action.payload.quantity : 1,
-            };
-
-            const existingItem = state.items.find(item => item.id === newItem.id);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                state.items.push(newItem);
-            }
-            state.totalQuantity += 1;
-            state.totalPrice += newItem.price;
-        },
-        removeItem: (state, action: PayloadAction<number>) => {
-            const index = state.items.findIndex(item => item.id === action.payload);
-            if (index !== -1) {
-                const itemToRemove = state.items[index];
-                state.totalQuantity -= itemToRemove.quantity;
-                state.totalPrice -= itemToRemove.price * itemToRemove.quantity;
-                state.items.splice(index, 1);
-            }
-        },
-        updateQuantity: (state, action: PayloadAction<{ id: number; quantity: number }>) => {
-            const itemToUpdate = state.items.find(item => item.id === action.payload.id);
-            if (itemToUpdate && action.payload.quantity > 0) {
-                state.totalQuantity += action.payload.quantity - itemToUpdate.quantity;
-                state.totalPrice += (action.payload.quantity - itemToUpdate.quantity) * itemToUpdate.price;
-                itemToUpdate.quantity = action.payload.quantity;
-            }
-        },
-        increaseQuantity: (state, action: PayloadAction<number>) => {
-            const item = state.items.find(item => item.id === action.payload);
-            if (item) {
-                item.quantity += 1;
-                state.totalQuantity += 1;
-                state.totalPrice += item.price;
-            }
-        },
-        decreaseQuantity: (state, action: PayloadAction<number>) => {
-            const item = state.items.find(item => item.id === action.payload);
-            if (item && item.quantity > 1) {
-                item.quantity -= 1;
-                state.totalQuantity -= 1;
-                state.totalPrice -= item.price;
-            }
-        },
-        clearCart: (state) => {
-            state.items = [];
-            state.totalQuantity = 0;
-            state.totalPrice = 0;
-        },
+  name: 'cart',
+  initialState,
+  reducers: {
+    setCartData: (state, action: PayloadAction<CartState>) => {
+      state.items = action.payload.items;
+      state.totalQuantity = action.payload.totalQuantity;
+      state.totalPrice = action.payload.totalPrice;
+      state.userId = action.payload.userId;
     },
+    addItem: (state, action: PayloadAction<CartItem>) => {
+      const existingItem = state.items.find((item) => item.id === action.payload.id);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.items.push({ ...action.payload, quantity: 1 });
+      }
+      state.totalQuantity += 1;
+      state.totalPrice += action.payload.price;
+    },
+    increaseQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find((item) => item.id === action.payload);
+      if (item) {
+        item.quantity += 1;
+        state.totalQuantity += 1;
+        state.totalPrice += item.price;
+      }
+    },
+    decreaseQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find((item) => item.id === action.payload);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+        state.totalQuantity -= 1;
+        state.totalPrice -= item.price;
+      }
+    },
+    removeItem: (state, action: PayloadAction<number>) => {
+      const index = state.items.findIndex((item) => item.id === action.payload);
+      if (index !== -1) {
+        const item = state.items[index];
+        state.totalQuantity -= item.quantity;
+        state.totalPrice -= item.price * item.quantity;
+        state.items.splice(index, 1);
+      }
+    },
+    clearCart: (state) => {
+      state.items = [];
+      state.totalQuantity = 0;
+      state.totalPrice = 0;
+    },
+    setUserId: (state, action: PayloadAction<string>) => {
+      state.userId = action.payload;
+    },
+  },
 });
 
-// Selector to get cart items
-export const selectCartItems = (state: RootState) => state.cart.items;
+// Add selectors
+export const selectCartItems = (state: { cart: CartState }) => state.cart.items;
+export const selectTotalPrice = (state: { cart: CartState }) => state.cart.totalPrice;
+export const selectTotalQuantity = (state: { cart: CartState }) => state.cart.totalQuantity;
 
-// Selector to get total quantity of items in the cart
-export const selectTotalQuantity = (state: RootState) => state.cart.totalQuantity;
+export const {
+  setCartData,
+  addItem,
+  increaseQuantity,
+  decreaseQuantity,
+  removeItem,
+  clearCart,
+  setUserId,
+} = cartSlice.actions;
 
-// Selector to get total price of items in the cart
-export const selectTotalPrice = (state: RootState) => state.cart.totalPrice;
-
-export const { addItem, removeItem, updateQuantity, increaseQuantity, decreaseQuantity, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

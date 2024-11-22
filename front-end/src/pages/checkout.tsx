@@ -1,25 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { selectCartItems, selectTotalPrice, clearCart } from '../stores/slices/cartSlide';
+import { clearCart, selectCartItems, selectTotalPrice } from '../stores/slices/cartSlide';
+import { AuthContext } from '../context/authContext';
 
 const Checkout: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const authContext = useContext(AuthContext);
+
     const items = useSelector(selectCartItems);
     const totalPrice = useSelector(selectTotalPrice);
     const [address, setAddress] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('credit');
 
     const handleConfirmOrder = async () => {
+        if (!authContext?.userId) {
+            alert('Vui lòng đăng nhập để đặt hàng.');
+            return;
+        }
+
         const order = {
+            userId: authContext.userId,
             items,
             total: totalPrice,
             address,
             paymentMethod,
             date: new Date().toLocaleDateString(),
-            status: 'Đang xử lý'
+            status: 'Đang xử lý',
         };
 
         try {

@@ -10,12 +10,13 @@ interface Product {
     price: number;
     imageUrl: string;
     description: string;
+    discountPrice?: number;
 }
 
 const ProductDetail: React.FC = () => {
     const dispatch = useDispatch();
     const { productId } = useParams<{ productId: string }>();
-    
+    const { id} = useParams<{ id: string }>();
     const [product, setProduct] = useState<Product | null>(null);
 
     const fetchProduct = async () => {
@@ -28,8 +29,16 @@ const ProductDetail: React.FC = () => {
     };
 
     useEffect(() => {
+        const fetchProduct = async () => {
+          try {
+            const response = await axios.get(`http://localhost:5000/products/${id}`);
+            setProduct(response.data);
+          } catch (error) {
+            console.error('Error fetching product details:', error);
+          }
+        };
         fetchProduct();
-    }, [productId]);
+      }, [id]);
 
     if (!product) return <p>Loading...</p>;
 
@@ -43,14 +52,20 @@ const ProductDetail: React.FC = () => {
 
     return (
         <div className="product-detail">
-            <h2>{product.name}</h2>
-            <img src={product.imageUrl} alt={product.name} className="product-detail-image" />
-            <p className="product-detail-price">Giá: {product.price} VND</p>
-            <p className="product-detail-description">{product.description}</p>
-            <button onClick={handleAddToCart} className="add-to-cart-button">
-                Thêm vào giỏ hàng
-            </button>
-        </div>
+        <img src={product.imageUrl} alt={product.name} className="product-detail-image" />
+        <h2>{product.name}</h2>
+        <p className="product-detail-price">
+          {product.discountPrice ? (
+            <>
+              <span className="original-price">{product.price} VND</span>
+              <span className="discount-price">{product.discountPrice} VND</span>
+            </>
+          ) : (
+            `${product.price} VND`
+          )}
+        </p>
+        <p className="product-description">{product.description}</p>
+      </div>
     );
 };
 
