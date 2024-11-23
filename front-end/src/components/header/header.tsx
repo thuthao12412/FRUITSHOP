@@ -1,7 +1,6 @@
-// src/components/Header.tsx
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaUserPlus, FaSignInAlt, FaSignOutAlt, FaSearch, FaUserShield, FaUsers, FaChartBar } from 'react-icons/fa';
+import { FaShoppingCart, FaUserPlus, FaSignInAlt, FaSignOutAlt, FaUserShield, FaUsers, FaChartBar } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { selectTotalQuantity } from '../../stores/slices/cartSlide'; // Import selector từ cartSlice
 import { AuthContext } from '../../context/authContext'; // Import AuthContext
@@ -10,7 +9,6 @@ const Header: React.FC = () => {
     const authContext = useContext(AuthContext);
     const isLoggedIn = authContext?.isLoggedIn;
     const userRole = authContext?.role;
-    const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
     // Lấy tổng số lượng sản phẩm trong giỏ hàng từ Redux
@@ -20,13 +18,6 @@ const Header: React.FC = () => {
         authContext?.logout();
         alert('Bạn đã đăng xuất!');
         navigate('/');
-    };
-
-    const handleSearch = (event: React.FormEvent) => {
-        event.preventDefault();
-        if (searchQuery.trim()) {
-            navigate(`/search?q=${searchQuery}`);
-        }
     };
 
     return (
@@ -48,9 +39,8 @@ const Header: React.FC = () => {
                             <FaUsers className="header__icon" /> Quản Lý Người Dùng
                         </Link>
                         <Link to="/admin/orders" className="header__icon-link">
-                        <FaChartBar className="header__icon" /> Quản Lý Đơn Hàng
+                            <FaChartBar className="header__icon" /> Quản Lý Đơn Hàng
                         </Link>
-                         
                         <button onClick={handleLogout} className="header__icon-link logout-button">
                             <FaSignOutAlt className="header__icon" /> Đăng Xuất
                         </button>
@@ -91,20 +81,6 @@ const Header: React.FC = () => {
                     </>
                 )}
             </nav>
-            <div className="header__search">
-                <form onSubmit={handleSearch} className="search-form">
-                    <input
-                        type="text"
-                        placeholder="Tìm kiếm..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="search-input"
-                    />
-                    <button type="submit" className="search-button">
-                        <FaSearch />
-                    </button>
-                </form>
-            </div>
         </header>
     );
 };

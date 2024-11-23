@@ -485,7 +485,13 @@
       "address": "",
       "paymentMethod": "credit",
       "date": "11/13/2024",
-      "status": "Đang xử lý"
+      "status": "Hoàn thành",
+      "history": [
+        {
+          "status": "Hoàn thành",
+          "timestamp": "2024-11-22T12:26:46.696Z"
+        }
+      ]
     },
     {
       "id": "98e4",
@@ -891,7 +897,7 @@
     },
     {
       "id": "dad0",
-      "userId": "b7f0",
+      "userId": null,
       "items": [
         {
           "id": "2",
@@ -904,6 +910,31 @@
       "total": 140000,
       "address": "",
       "paymentMethod": "credit",
+      "date": "11/22/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "4bc5",
+      "userId": "2",
+      "items": [
+        {
+          "id": "10",
+          "name": "Dừa Xiêm",
+          "price": 30000,
+          "imageUrl": "https://tse3.mm.bing.net/th?id=OIP.dJdP8ABvrtnPCW6klytIaQAAAA&pid=Api&P=0&h=180",
+          "quantity": 2
+        },
+        {
+          "id": "2",
+          "name": "Xoài Cát Hòa Lộc",
+          "price": 70000,
+          "imageUrl": "https://tse2.mm.bing.net/th?id=OIP.p9Zhl5dzQEYqHnlRNU6_LwHaHa&pid=Api&P=0&h=180",
+          "quantity": 1
+        }
+      ],
+      "total": 130000,
+      "address": "fgghugh",
+      "paymentMethod": "cash",
       "date": "11/22/2024",
       "status": "Đang xử lý"
     }
@@ -928,15 +959,6 @@
       "name": "hithaone",
       "email": "phamthithuthao2819@gmail.com",
       "password": "1234123",
-      "role": "user"
-    },
-    {
-      "id": "b7f0",
-      "username": "Thu Thảo",
-      "email": "phamthithuthao2819@gmail.com",
-      "password": "123123",
-      "phone": "0961378445",
-      "address": "ở đây",
       "role": "user"
     }
   ]

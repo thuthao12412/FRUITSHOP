@@ -90,8 +90,8 @@ const UsersAdmin: React.FC = () => {
 
     const filteredUsers = users.filter(
         (user) =>
-          (user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false) ||
-          (user.email?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false)
+          (user.name?.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          (user.email?.toLowerCase().includes(searchQuery.toLowerCase()) )
       );
       
 

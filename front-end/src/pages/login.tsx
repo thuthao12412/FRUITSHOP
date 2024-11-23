@@ -112,6 +112,7 @@ const Login: React.FC = () => {
                             className="input-field"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            
                         />
                     </div>
                     <div className="input-group">
@@ -123,6 +124,8 @@ const Login: React.FC = () => {
                             className="input-field"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                          autoComplete="new-password"
+                           
                         />
                     </div>
                     <button type="submit" className="auth-button">
