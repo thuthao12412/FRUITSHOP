@@ -53,14 +53,20 @@ const Home: React.FC = () => {
     setCurrentOnSalePage(page);
   };
 
+  // Kiểm tra xem có cần hiển thị phân trang hay không
+  const shouldShowPaginationBestSellers = Math.ceil(bestSellers.length / itemsPerPage) > 1;
+  const shouldShowPaginationOnSale = Math.ceil(onSaleProducts.length / itemsPerPage) > 1;
+
   return (
     <div className="home-page">
       {/* Banner */}
       <section className="banner">
-        <img src="https://via.placeholder.com/1200x400" alt="Banner" />
+        <h1>Welcome to Our Store</h1>
+        <p>Discover the best products at unbeatable prices.</p>
+        <a href="#shop-now" className="banner-btn">Shop Now</a>
       </section>
 
-      {/* Sản phẩm bán chạy */}
+      {/* Best Sellers */}
       <section className="best-sellers">
         <h2>Sản Phẩm Bán Chạy</h2>
         <div className="products-grid">
@@ -69,7 +75,7 @@ const Home: React.FC = () => {
           ))}
         </div>
         {/* Pagination for Best Sellers */}
-        <div className="pagination">
+        <div className={`pagination ${shouldShowPaginationBestSellers ? 'visible' : ''}`}>
           {Array.from({ length: Math.ceil(bestSellers.length / itemsPerPage) }, (_, index) => (
             <button
               key={index}
@@ -82,7 +88,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Sản phẩm đang giảm giá */}
+      {/* On Sale Products */}
       <section className="on-sale">
         <h2>Sản Phẩm Giảm Giá</h2>
         <div className="products-grid">
@@ -91,7 +97,7 @@ const Home: React.FC = () => {
           ))}
         </div>
         {/* Pagination for On Sale Products */}
-        <div className="pagination">
+        <div className={`pagination ${shouldShowPaginationOnSale ? 'visible' : ''}`}>
           {Array.from({ length: Math.ceil(onSaleProducts.length / itemsPerPage) }, (_, index) => (
             <button
               key={index}
@@ -103,8 +109,6 @@ const Home: React.FC = () => {
           ))}
         </div>
       </section>
-  
-
 
       {/* About Section */}
       <section className="about-section">

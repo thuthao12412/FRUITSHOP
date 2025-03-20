@@ -23,14 +23,14 @@ const Header: React.FC = () => {
     return (
         <header className="header">
             <div className="header__logo">
-                <h1>Fruit Shop</h1>
+                <h1>Cửa hàng trái cây</h1>
             </div>
             <nav className="header__nav">
                 {userRole === 'admin' ? (
                     <>
                         {/* Hiển thị giao diện admin */}
                         <Link to="/admin/dashboard" className="header__icon-link">
-                            <FaChartBar className="header__icon" /> Dashboard
+                            <FaChartBar className="header__icon" /> Thống kê
                         </Link>
                         <Link to="/admin/productsadmin" className="header__icon-link">
                             <FaUserShield className="header__icon" /> Quản Lý Sản Phẩm

@@ -33,6 +33,14 @@ const cartSlice = createSlice({
       state.totalPrice = action.payload.totalPrice;
       state.userId = action.payload.userId;
     },
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Adds an item to the cart. If the item already exists, increases its quantity by 1.
+ * Otherwise, adds the item to the cart with a default quantity of 1.
+ * Updates the total quantity and total price of the cart accordingly.
+ *
+ * @param {CartState} state - The current state of the cart.
+/******  39da4b98-b59b-4c64-a03f-1b43e6e34622  *******/
     addItem: (state, action: PayloadAction<CartItem>) => {
       const existingItem = state.items.find((item) => item.id === action.payload.id);
       if (existingItem) {

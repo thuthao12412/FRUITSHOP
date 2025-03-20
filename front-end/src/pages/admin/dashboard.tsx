@@ -1,6 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import axios from 'axios';
+
+// Đăng ký các thành phần của Chart.js
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Dashboard: React.FC = () => {
   const [stats, setStats] = useState({
@@ -68,7 +81,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard">
-      <h1>Admin Dashboard</h1>
+      <h1>Thống kê</h1>
       <div className="stats">
         <div className="stat-item">
           <h3>Tổng Doanh Thu</h3>

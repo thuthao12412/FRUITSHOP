@@ -13,6 +13,8 @@ const Checkout: React.FC = () => {
     const items = useSelector(selectCartItems);
     const totalPrice = useSelector(selectTotalPrice);
     const [address, setAddress] = useState('');
+    const [name, setName] = useState(''); // Thêm tên người nhận
+    const [phone, setPhone] = useState(''); // Thêm số điện thoại
     const [paymentMethod, setPaymentMethod] = useState('credit');
 
     const handleConfirmOrder = async () => {
@@ -26,6 +28,8 @@ const Checkout: React.FC = () => {
             items,
             total: totalPrice,
             address,
+            phone,  // Thêm số điện thoại vào đơn hàng
+            name,   // Thêm tên người nhận vào đơn hàng
             paymentMethod,
             date: new Date().toLocaleDateString(),
             status: 'Đang xử lý',
@@ -48,14 +52,29 @@ const Checkout: React.FC = () => {
                 <div className="checkout-items">
                     {items.map((item) => (
                         <div key={item.id} className="checkout-item">
-                            <p>{item.name}</p>
-                            <p>Giá: {item.price} VND</p>
-                            <p>Số lượng: {item.quantity}</p>
+                            <img src={item.imageUrl} alt={item.name} className="product-image" /> {/* Hình ảnh sản phẩm */}
+                            <div className="checkout-item-details">
+                                <p>{item.name}</p>
+                                <p>Giá: {item.price} VND</p>
+                                <p>Số lượng: {item.quantity}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
                 <div className="checkout-form">
                     <h3>Thông Tin Giao Hàng</h3>
+                    <input
+                        type="text"
+                        placeholder="Tên người nhận"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Số điện thoại"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    />
                     <input
                         type="text"
                         placeholder="Địa chỉ giao hàng"

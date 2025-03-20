@@ -7,7 +7,6 @@ import { AuthContext } from '../context/authContext';
 import axios from 'axios';
 
 const Cart: React.FC = () => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true); // Trạng thái đang tải dữ liệu
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
@@ -31,13 +30,9 @@ const Cart: React.FC = () => {
                 userId: userId,
               })
             );
-            setErrorMessage(null); // Xóa lỗi nếu lấy dữ liệu thành công
-          } else {
-            setErrorMessage('Không có dữ liệu giỏ hàng.');
           }
         } catch (error) {
           console.error('Lỗi khi tải dữ liệu giỏ hàng:', error);
-          setErrorMessage('Không thể tải dữ liệu giỏ hàng. Vui lòng thử lại sau.');
         } finally {
           setIsLoading(false);
         }
@@ -53,19 +48,16 @@ const Cart: React.FC = () => {
 
   // Xử lý tăng số lượng sản phẩm
   const handleIncrease = (id: number) => {
-    setErrorMessage(null); // Xóa lỗi trước khi cập nhật
     dispatch(increaseQuantity(id));
   };
 
   // Xử lý giảm số lượng sản phẩm
   const handleDecrease = (id: number) => {
-    setErrorMessage(null); // Xóa lỗi trước khi cập nhật
     dispatch(decreaseQuantity(id));
   };
 
   // Xử lý xóa sản phẩm khỏi giỏ hàng
   const handleRemove = (id: number) => {
-    setErrorMessage(null); // Xóa lỗi trước khi cập nhật
     dispatch(removeItem(id));
   };
 
@@ -94,7 +86,6 @@ const Cart: React.FC = () => {
   return (
     <div className="cart-container">
       <h2>Giỏ Hàng</h2>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
       {cartItems.length === 0 ? (
         <p className="empty-cart">Không có sản phẩm trong giỏ hàng</p>
       ) : (

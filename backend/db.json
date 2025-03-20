@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "Táo Fuji",
-      "price": 50000,
+      "price": 49998,
       "description": "Táo Fuji ngọt, giòn, giàu dinh dưỡng",
       "imageUrl": "https://tse4.mm.bing.net/th?id=OIP.SzYfIE6KbUe5jM77M3Xi2QHaE8&pid=Api&P=0&h=180",
       "category": "Trái cây",
@@ -355,6 +355,30 @@
       "category": "Trái cây",
       "description": "Hay chửi",
       "imageUrl": ""
+    },
+    {
+      "id": "34c4",
+      "name": "",
+      "price": 1,
+      "category": "",
+      "description": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "6b00",
+      "name": "Nho",
+      "price": 1,
+      "category": "TRái cây nhập khẩu",
+      "description": "jhnm",
+      "imageUrl": ""
+    },
+    {
+      "id": "a845",
+      "name": "",
+      "price": 1,
+      "category": "",
+      "description": "",
+      "imageUrl": ""
     }
   ],
   "orders": [
@@ -413,7 +437,13 @@
       "address": "",
       "paymentMethod": "credit",
       "date": "11/11/2024",
-      "status": "Đang xử lý"
+      "status": "Hoàn thành",
+      "history": [
+        {
+          "status": "Hoàn thành",
+          "timestamp": "2024-12-04T13:03:29.630Z"
+        }
+      ]
     },
     {
       "id": "b458",
@@ -449,7 +479,13 @@
       "address": "",
       "paymentMethod": "credit",
       "date": "11/11/2024",
-      "status": "Đang xử lý"
+      "status": "Hoàn thành",
+      "history": [
+        {
+          "status": "Hoàn thành",
+          "timestamp": "2024-12-04T12:35:01.302Z"
+        }
+      ]
     },
     {
       "id": "eebf",
@@ -598,7 +634,13 @@
       "address": "",
       "paymentMethod": "credit",
       "date": "11/14/2024",
-      "status": "Đang xử lý"
+      "status": "Đã hủy",
+      "history": [
+        {
+          "status": "Đã hủy",
+          "timestamp": "2024-12-04T13:03:35.894Z"
+        }
+      ]
     },
     {
       "id": "23b5",
@@ -710,7 +752,13 @@
       "address": "yujnm",
       "paymentMethod": "credit",
       "date": "11/17/2024",
-      "status": "Đang xử lý"
+      "status": "Hoàn thành",
+      "history": [
+        {
+          "status": "Hoàn thành",
+          "timestamp": "2024-12-04T13:07:04.055Z"
+        }
+      ]
     },
     {
       "id": "ffa2",
@@ -763,7 +811,13 @@
       "address": "",
       "paymentMethod": "cash",
       "date": "11/21/2024",
-      "status": "Đang xử lý"
+      "status": "Hoàn thành",
+      "history": [
+        {
+          "status": "Hoàn thành",
+          "timestamp": "2024-12-04T13:07:06.169Z"
+        }
+      ]
     },
     {
       "id": "e957",
@@ -780,7 +834,13 @@
       "address": "",
       "paymentMethod": "credit",
       "date": "11/21/2024",
-      "status": "Đang xử lý"
+      "status": "Hoàn thành",
+      "history": [
+        {
+          "status": "Hoàn thành",
+          "timestamp": "2024-12-04T13:07:07.304Z"
+        }
+      ]
     },
     {
       "id": "88f7",
@@ -937,6 +997,82 @@
       "paymentMethod": "cash",
       "date": "11/22/2024",
       "status": "Đang xử lý"
+    },
+    {
+      "id": "f452",
+      "userId": "2",
+      "items": [
+        {
+          "id": "3",
+          "name": "Dưa Hấu",
+          "price": 25000,
+          "imageUrl": "https://tse1.mm.bing.net/th?id=OIP.NYz3KoFlRc_SndkrtywMFgHaHa&pid=Api&P=0&h=180",
+          "quantity": 1
+        }
+      ],
+      "total": 25000,
+      "address": "",
+      "paymentMethod": "credit",
+      "date": "11/25/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "9558",
+      "userId": "2",
+      "items": [
+        {
+          "id": "3",
+          "name": "Dưa Hấu",
+          "price": 25000,
+          "imageUrl": "https://tse1.mm.bing.net/th?id=OIP.NYz3KoFlRc_SndkrtywMFgHaHa&pid=Api&P=0&h=180",
+          "quantity": 1
+        }
+      ],
+      "total": 25000,
+      "address": "",
+      "paymentMethod": "credit",
+      "date": "12/3/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "f888",
+      "userId": "2",
+      "items": [
+        {
+          "id": "1",
+          "name": "Táo Fuji",
+          "price": 45000,
+          "imageUrl": "https://tse4.mm.bing.net/th?id=OIP.SzYfIE6KbUe5jM77M3Xi2QHaE8&pid=Api&P=0&h=180",
+          "quantity": 1
+        }
+      ],
+      "total": 45000,
+      "address": "jm",
+      "phone": "0961378445",
+      "name": "Thảo",
+      "paymentMethod": "credit",
+      "date": "12/4/2024",
+      "status": "Đang xử lý"
+    },
+    {
+      "id": "59ef",
+      "userId": "2",
+      "items": [
+        {
+          "id": "3",
+          "name": "Dưa Hấu",
+          "price": 25000,
+          "imageUrl": "https://tse1.mm.bing.net/th?id=OIP.NYz3KoFlRc_SndkrtywMFgHaHa&pid=Api&P=0&h=180",
+          "quantity": 4
+        }
+      ],
+      "total": 100000,
+      "address": "",
+      "phone": "",
+      "name": "",
+      "paymentMethod": "credit",
+      "date": "12/4/2024",
+      "status": "Đang xử lý"
     }
   ],
   "users": [
@@ -952,7 +1088,12 @@
       "name": "user",
       "email": "user@gmail.com",
       "password": "123456",
-      "role": "user"
+      "role": "user",
+      "username": "Gà rán",
+      "phone": "0123456789",
+      "address": "siu ngon",
+      "oldPassword": "123456",
+      "newPassword": "123123"
     },
     {
       "id": "3",

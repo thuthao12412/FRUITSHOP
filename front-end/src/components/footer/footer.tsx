@@ -8,8 +8,8 @@ const Footer: React.FC = () => {
         <footer className="footer">
             <div className="footer-content">
                 <div className="footer-section about">
-                    <h3>FruitShop</h3>
-                    <p>FruitShop là nơi cung cấp các loại trái cây tươi ngon, chất lượng cao từ khắp nơi trên thế giới.</p>
+                    <h3>Cửa hàng trái cây</h3>
+                    <p>Đây là nơi cung cấp các loại trái cây tươi ngon, chất lượng cao từ khắp nơi trên thế giới.</p>
                     <p>Chúng tôi cam kết mang lại sản phẩm an toàn và dịch vụ tốt nhất cho khách hàng.</p>
                 </div>
 

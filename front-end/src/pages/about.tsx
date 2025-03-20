@@ -5,19 +5,19 @@ const About: React.FC = () => {
     return (
         <div className="about">
             <h2>Giới Thiệu Về Chúng Tôi</h2>
-            <p>Chào mừng bạn đến với <strong>Fruit Shop</strong> - nơi cung cấp các loại trái cây tươi ngon nhất từ khắp nơi.</p>
+            <p>Chào mừng bạn đến với <strong>cửa hàng trái cây</strong> - nơi cung cấp các loại trái cây tươi ngon nhất từ khắp nơi.</p>
 
             <section className="about-section">
                 <h3>Sứ Mệnh Của Chúng Tôi</h3>
                 <p>
-                    Fruit Shop cam kết đem đến cho khách hàng những loại trái cây tươi ngon, chất lượng cao và an toàn cho sức khỏe. Chúng tôi luôn chọn lựa kỹ càng từ các nhà cung cấp uy tín, đảm bảo mang lại giá trị dinh dưỡng tốt nhất cho mỗi sản phẩm.
+                    Cửa hàng trái cây cam kết đem đến cho khách hàng những loại trái cây tươi ngon, chất lượng cao và an toàn cho sức khỏe. Chúng tôi luôn chọn lựa kỹ càng từ các nhà cung cấp uy tín, đảm bảo mang lại giá trị dinh dưỡng tốt nhất cho mỗi sản phẩm.
                 </p>
             </section>
 
             <section className="about-section">
                 <h3>Tầm Nhìn</h3>
                 <p>
-                    Fruit Shop phấn đấu trở thành hệ thống cửa hàng trái cây hàng đầu, mang lại sản phẩm xanh - sạch - an toàn, giúp khách hàng có những trải nghiệm tuyệt vời trong mỗi bữa ăn gia đình. Chúng tôi mong muốn xây dựng một cộng đồng tiêu dùng thông minh và lành mạnh.
+                    Cửa hàng trái cây phấn đấu trở thành hệ thống cửa hàng trái cây hàng đầu, mang lại sản phẩm xanh - sạch - an toàn, giúp khách hàng có những trải nghiệm tuyệt vời trong mỗi bữa ăn gia đình. Chúng tôi mong muốn xây dựng một cộng đồng tiêu dùng thông minh và lành mạnh.
                 </p>
             </section>
 
@@ -51,7 +51,7 @@ const About: React.FC = () => {
                 </p>
                 <p><strong>Email:</strong> support@fruitshop.com</p>
                 <p><strong>Hotline:</strong> 1800-1234</p>
-                <p><strong>Địa chỉ:</strong> 123 Đường Trái Cây, Quận 1, TP. Hồ Chí Minh</p>
+                <p><strong>Địa chỉ:</strong> 123 Đường Trái Cây, Quận Trái Cây, TP. Trái cây</p>
             </section>
         </div>
     );

@@ -1,50 +1,78 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/authContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../stores/store';
 import { fetchOrderHistory } from '../stores/slices/orderHistorySlice';
+import axios from 'axios';
+import { toast } from 'react-toastify'; // Thêm thư viện thông báo
 
 const Account: React.FC = () => {
     const authContext = useContext(AuthContext);
     const isLoggedIn = authContext?.isLoggedIn;
-    const userId = authContext?.userId; // Moved outside the condition
+    const userId = authContext?.userId;
     const dispatch = useDispatch<AppDispatch>();
 
     const [isEditing, setIsEditing] = useState(false);
     const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [userInfo, setUserInfo] = useState({
-        username: '',
-        email: '',
-        phone: '',
-        address: '',
-        joinedDate: '',
+        username: authContext?.username || '',
+        email: authContext?.email || '',
+        phone: authContext?.phone || '',
+        address: authContext?.address || '',
     });
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
 
     const orderHistory = useSelector((state: RootState) => state.orderHistory.orders);
 
     useEffect(() => {
         if (isLoggedIn && userId) {
-            dispatch(fetchOrderHistory(userId)); // Only fetch if `userId` exists
+            dispatch(fetchOrderHistory(userId));
         }
-    }, [isLoggedIn, authContext?.userId, dispatch]);
+    }, [isLoggedIn, userId, dispatch]);
 
-    const handleSave = () => {
-        alert('Thông tin của bạn đã được cập nhật thành công!');
-        setIsEditing(false);
-    };
-
-    const handlePasswordChange = () => {
-        if (oldPassword === 'correctOldPassword') {
-            alert('Mật khẩu đã được thay đổi thành công!');
+    // Đổi mật khẩu
+    const handlePasswordChange = async () => {
+        try {
+            const response = await axios.patch(`http://localhost:5000/users/${userId}`, {
+                oldPassword,
+                newPassword,
+            });
+            toast.success(response.data.message || 'Mật khẩu đã được thay đổi thành công!');
             setOldPassword('');
             setNewPassword('');
             setIsChangingPassword(false);
-        } else {
-            alert('Mật khẩu cũ không đúng!');
+        } catch (error) {
+            console.error('Lỗi khi đổi mật khẩu:', error);
+            if (axios.isAxiosError(error)) {
+                toast.error(error.response?.data?.message || 'Đã xảy ra lỗi khi đổi mật khẩu.');
+            }
         }
     };
+
+    // Lưu thông tin người dùng
+    const handleSave = async () => {
+        try {
+            const response = await axios.patch(`http://localhost:5000/users/${userId}`, userInfo);
+            toast.success('Thông tin của bạn đã được cập nhật thành công!');
+            setIsEditing(false);
+        } catch (error) {
+            console.error('Lỗi khi cập nhật thông tin người dùng:', error);
+            toast.error('Đã xảy ra lỗi khi cập nhật thông tin.');
+        }
+    };
+
+    // Phân trang
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const paginatedOrders = orderHistory.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
 
     if (!isLoggedIn) {
         return (
@@ -66,7 +94,9 @@ const Account: React.FC = () => {
                                 <input
                                     type="text"
                                     value={userInfo.username}
-                                    onChange={(e) => setUserInfo({ ...userInfo, username: e.target.value })}
+                                    onChange={(e) =>
+                                        setUserInfo({ ...userInfo, username: e.target.value })
+                                    }
                                 />
                             </label>
                             <label>
@@ -74,7 +104,9 @@ const Account: React.FC = () => {
                                 <input
                                     type="email"
                                     value={userInfo.email}
-                                    onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
+                                    onChange={(e) =>
+                                        setUserInfo({ ...userInfo, email: e.target.value })
+                                    }
                                 />
                             </label>
                             <label>
@@ -82,7 +114,9 @@ const Account: React.FC = () => {
                                 <input
                                     type="tel"
                                     value={userInfo.phone}
-                                    onChange={(e) => setUserInfo({ ...userInfo, phone: e.target.value })}
+                                    onChange={(e) =>
+                                        setUserInfo({ ...userInfo, phone: e.target.value })
+                                    }
                                 />
                             </label>
                             <label>
@@ -90,7 +124,9 @@ const Account: React.FC = () => {
                                 <input
                                     type="text"
                                     value={userInfo.address}
-                                    onChange={(e) => setUserInfo({ ...userInfo, address: e.target.value })}
+                                    onChange={(e) =>
+                                        setUserInfo({ ...userInfo, address: e.target.value })
+                                    }
                                 />
                             </label>
                             <button onClick={handleSave}>Lưu</button>
@@ -98,11 +134,18 @@ const Account: React.FC = () => {
                         </>
                     ) : (
                         <>
-                            <p><strong>Tên đăng nhập:</strong> {authContext?.username}</p>
-                            <p><strong>Email:</strong> {authContext?.email}</p>
-                            <p><strong>Điện thoại:</strong> {authContext?.phone}</p>
-                            <p><strong>Địa chỉ:</strong> {authContext?.address}</p>
-                            <p><strong>Ngày tham gia:</strong> {userInfo.joinedDate}</p>
+                            <p>
+                                <strong>Tên đăng nhập:</strong> {authContext?.username}
+                            </p>
+                            <p>
+                                <strong>Email:</strong> {authContext?.email}
+                            </p>
+                            <p>
+                                <strong>Điện thoại:</strong> {authContext?.phone}
+                            </p>
+                            <p>
+                                <strong>Địa chỉ:</strong> {authContext?.address}
+                            </p>
                             <button onClick={() => setIsEditing(true)}>Chỉnh sửa thông tin</button>
                         </>
                     )}
@@ -143,16 +186,32 @@ const Account: React.FC = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {orderHistory.map((order) => (
+                            {paginatedOrders.map((order) => (
                                 <tr key={order.id}>
                                     <td>{order.id}</td>
                                     <td>{order.date}</td>
-                                    <td>{order.total}</td>
+                                    <td>{order.total.toLocaleString()} VND</td>
                                     <td>{order.status}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    <div className="pagination">
+                        {Array.from(
+                            { length: Math.ceil(orderHistory.length / itemsPerPage) },
+                            (_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => handlePageChange(index + 1)}
+                                    className={`pagination-button ${
+                                        currentPage === index + 1 ? 'active' : ''
+                                    }`}
+                                >
+                                    {index + 1}
+                                </button>
+                            )
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

@@ -33,6 +33,7 @@ const Register: React.FC = () => {
                 username,
                 phone,
                 address,
+                password,
                 3600 // 1-hour expiry
             );
 

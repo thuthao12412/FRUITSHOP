@@ -22,6 +22,7 @@ import Dashboard from './pages/admin/dashboard';
 import UsersAdmin from './pages/admin/usersAdmin';
 import ProductsAdmin from './pages/admin/productsAdmin';
 import OrdersAdmin from './pages/admin/ordersAdmin';
+import { ToastContainer } from 'react-toastify';
 
 const App: React.FC = () => {
     // Sử dụng useSelector để lấy các sản phẩm trong giỏ
@@ -34,9 +35,11 @@ const App: React.FC = () => {
         <AuthProvider>
         <Router>
            <Header />
-
+           
             <main>
+            
                 <Routes>
+                    
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/products" element={<Products />} />

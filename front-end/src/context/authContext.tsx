@@ -1,7 +1,6 @@
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
-import axios from 'axios';
-import { clearCart } from '../stores/slices/cartSlide';
 import { useDispatch } from 'react-redux';
+import { clearCart } from '../stores/slices/cartSlide';
 
 interface AuthContextType {
     isLoggedIn: boolean;
@@ -12,6 +11,8 @@ interface AuthContextType {
     username: string | null;
     phone: string | null;
     address: string | null;
+    joinedDate: string | null; // Thêm joinedDate
+    password: string | null; // Thêm password
     login: (
         userRole: 'user' | 'admin',
         userToken: string,
@@ -20,6 +21,7 @@ interface AuthContextType {
         username: string,
         phone: string,
         address: string,
+        joinedDate: string,
         expiresIn: number
     ) => void;
     logout: () => void;
@@ -36,38 +38,53 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [username, setUsername] = useState<string | null>(null);
     const [phone, setPhone] = useState<string | null>(null);
     const [address, setAddress] = useState<string | null>(null);
+    const [joinedDate, setJoinedDate] = useState<string | null>(null);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const savedToken = localStorage.getItem('token');
-        const savedRole = localStorage.getItem('role') as 'user' | 'admin' | null;
-        const savedUserId = localStorage.getItem('userId');
-        const savedEmail = localStorage.getItem('email');
-        const savedUsername = localStorage.getItem('username');
-        const savedPhone = localStorage.getItem('phone');
-        const savedAddress = localStorage.getItem('address');
-        const expiry = localStorage.getItem('tokenExpiry');
+        const savedData = {
+            token: localStorage.getItem('token'),
+            role: localStorage.getItem('role') as 'user' | 'admin' | null,
+            userId: localStorage.getItem('userId'),
+            email: localStorage.getItem('email'),
+            username: localStorage.getItem('username'),
+            phone: localStorage.getItem('phone'),
+            address: localStorage.getItem('address'),
+            joinedDate: localStorage.getItem('joinedDate'),
+            tokenExpiry: localStorage.getItem('tokenExpiry'),
+        };
 
-        if (savedToken && savedRole && savedUserId && savedEmail && savedUsername && savedPhone && savedAddress && expiry) {
-            const isExpired = new Date().getTime() > parseInt(expiry, 10);
+        if (savedData.token && savedData.role && savedData.userId && savedData.email && savedData.username && savedData.phone && savedData.address && savedData.tokenExpiry) {
+            const isExpired = new Date().getTime() > parseInt(savedData.tokenExpiry, 10);
             if (isExpired) {
                 console.log('Token expired. Logging out.');
                 logout();
             } else {
-                setToken(savedToken);
-                setRole(savedRole);
-                setUserId(savedUserId);
-                setEmail(savedEmail);
-                setUsername(savedUsername);
-                setPhone(savedPhone);
-                setAddress(savedAddress);
+                setToken(savedData.token);
+                setRole(savedData.role);
+                setUserId(savedData.userId);
+                setEmail(savedData.email);
+                setUsername(savedData.username);
+                setPhone(savedData.phone);
+                setAddress(savedData.address);
+                setJoinedDate(savedData.joinedDate || new Date().toISOString().split('T')[0]); // Nếu không có joinedDate, sử dụng ngày hiện tại
                 setIsLoggedIn(true);
             }
         }
     }, []);
 
-    const login = (userRole: 'user' | 'admin', userToken: string, userId: string, userEmail: string, username: string, phone: string, address: string, expiresIn: number) => {
+    const login = (
+        userRole: 'user' | 'admin',
+        userToken: string,
+        userId: string,
+        userEmail: string,
+        username: string,
+        phone: string,
+        address: string,
+        joinedDate: string,
+        expiresIn: number
+    ) => {
         const expiryTime = new Date().getTime() + expiresIn * 1000;
         setIsLoggedIn(true);
         setRole(userRole);
@@ -77,6 +94,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setUsername(username);
         setPhone(phone);
         setAddress(address);
+        setJoinedDate(joinedDate);
+
         localStorage.setItem('token', userToken);
         localStorage.setItem('role', userRole);
         localStorage.setItem('userId', userId);
@@ -84,6 +103,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         localStorage.setItem('username', username);
         localStorage.setItem('phone', phone);
         localStorage.setItem('address', address);
+        localStorage.setItem('joinedDate', joinedDate);
         localStorage.setItem('tokenExpiry', expiryTime.toString());
     };
 
@@ -101,13 +121,42 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setUsername(null);
         setPhone(null);
         setAddress(null);
+        setJoinedDate(null);
 
-        const keysToRemove = ['token', 'role', 'userId', 'email', 'username', 'phone', 'address', 'cartItems', 'cartTotalQuantity', 'cartTotalPrice', 'tokenExpiry'];
+        const keysToRemove = [
+            'token',
+            'role',
+            'userId',
+            'email',
+            'username',
+            'phone',
+            'address',
+            'joinedDate',
+            'cartItems',
+            'cartTotalQuantity',
+            'cartTotalPrice',
+            'tokenExpiry',
+        ];
         keysToRemove.forEach((key) => localStorage.removeItem(key));
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, role, token, userId, email, username, phone, address, login, logout }}>
+        <AuthContext.Provider
+            value={{
+                isLoggedIn,
+                role,
+                token,
+                userId,
+                email,
+                username,
+                phone,
+                address,
+                joinedDate, // Truyền joinedDate vào context
+                password: null, // Password không được lưu trữ ở đây, cần được xử lý thông qua API
+                login,
+                logout,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );

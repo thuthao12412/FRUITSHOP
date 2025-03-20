@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { writeFile, utils } from 'xlsx';
-import { saveAs } from 'file-saver';
 
 interface Order {
     id: number;
@@ -12,7 +11,7 @@ interface Order {
     date: string;
     status: string;
     history?: { status: string; timestamp: string }[];
-    email?: string; // Assuming email is part of the order data
+    email?: string;
 }
 
 const OrdersAdmin: React.FC = () => {
@@ -48,7 +47,6 @@ const OrdersAdmin: React.FC = () => {
                 ],
             });
 
-            // Gửi email thông báo
             if (updatedOrder?.email) {
                 await axios.post('http://localhost:5000/send-email', {
                     to: updatedOrder.email,
@@ -89,7 +87,6 @@ const OrdersAdmin: React.FC = () => {
         <div className="admin-container">
             <h1>Quản Lý Đơn Hàng</h1>
 
-            {/* Bộ lọc và tìm kiếm */}
             <div className="filters">
                 <input
                     type="text"
@@ -106,7 +103,6 @@ const OrdersAdmin: React.FC = () => {
                 <button onClick={exportToExcel}>Xuất báo cáo</button>
             </div>
 
-            {/* Bảng đơn hàng */}
             <table>
                 <thead>
                     <tr>
@@ -143,12 +139,14 @@ const OrdersAdmin: React.FC = () => {
                                 >
                                     Hoàn thành
                                 </button>
-                                <button
-                                    onClick={() => handleUpdateStatus(order.id, 'Đã hủy')}
-                                    disabled={order.status === 'Đã hủy' || order.status === 'Hoàn thành'}
-                                >
-                                    Hủy
-                                </button>
+                                {order.status !== 'Hoàn thành' && (
+                                    <button
+                                        onClick={() => handleUpdateStatus(order.id, 'Đã hủy')}
+                                        disabled={order.status === 'Đã hủy'}
+                                    >
+                                        Hủy
+                                    </button>
+                                )}
                                 <button onClick={() => setSelectedOrder(order)}>Xem chi tiết</button>
                             </td>
                         </tr>
@@ -156,7 +154,6 @@ const OrdersAdmin: React.FC = () => {
                 </tbody>
             </table>
 
-            {/* Phân trang */}
             <div className="pagination">
                 <button
                     onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
@@ -175,7 +172,6 @@ const OrdersAdmin: React.FC = () => {
                 </button>
             </div>
 
-            {/* Modal chi tiết đơn hàng */}
             {selectedOrder && (
                 <div className="order-modal">
                     <h3>Chi tiết đơn hàng #{selectedOrder.id}</h3>

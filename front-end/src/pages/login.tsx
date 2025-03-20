@@ -15,6 +15,12 @@ const Login: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        if (authContext?.isLoggedIn) {
+            navigate('/');
+        }
+    }, [authContext?.isLoggedIn, navigate]);
+
+    useEffect(() => {
         const savedCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
         const savedTotalQuantity = JSON.parse(localStorage.getItem('cartTotalQuantity') || '0');
         const savedTotalPrice = JSON.parse(localStorage.getItem('cartTotalPrice') || '0');
@@ -35,6 +41,7 @@ const Login: React.FC = () => {
 
         try {
             const response = await axios.get(`http://localhost:5000/users?email=${email}&password=${password}`);
+            
             if (response.data.length > 0) {
                 const user = response.data[0];
                 const role = user.role || 'user';
@@ -42,6 +49,8 @@ const Login: React.FC = () => {
                 const username = user.username || '';
                 const phone = user.phone || '';
                 const address = user.address || '';
+                const password = user.password || '';
+                const email = user.email || '';
 
                 authContext?.login(
                     role,
@@ -51,27 +60,28 @@ const Login: React.FC = () => {
                     username,
                     phone,
                     address,
+                    password,
                     3600 // 1 hour expiry
                 );
 
-                // Synchronize user's cart
+                // Fetch user cart and synchronize
                 const fetchUserCart = async () => {
                     try {
                         const cartResponse = await axios.get(`http://localhost:5000/carts?userId=${userId}`);
-                        if (cartResponse.data) {
-                            dispatch(setCartData(cartResponse.data));
-                            localStorage.setItem('cartItems', JSON.stringify(cartResponse.data.items));
-                            localStorage.setItem('cartTotalQuantity', JSON.stringify(cartResponse.data.totalQuantity));
-                            localStorage.setItem('cartTotalPrice', JSON.stringify(cartResponse.data.totalPrice));
+                        if (cartResponse.data.length > 0) {
+                            const cart = cartResponse.data[0];
+                            dispatch(setCartData(cart));
+                            localStorage.setItem('cartItems', JSON.stringify(cart.items));
+                            localStorage.setItem('cartTotalQuantity', JSON.stringify(cart.totalQuantity));
+                            localStorage.setItem('cartTotalPrice', JSON.stringify(cart.totalPrice));
                         }
                     } catch (error) {
                         console.error('Error fetching user cart:', error);
                     }
                 };
-                fetchUserCart();
 
+                fetchUserCart();
                 dispatch(setUserId(userId));
-                alert(`Đăng nhập thành công với vai trò ${role}`);
                 navigate('/');
             } else {
                 setError('Đăng nhập thất bại. Vui lòng kiểm tra email và mật khẩu.');
@@ -112,7 +122,6 @@ const Login: React.FC = () => {
                             className="input-field"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            
                         />
                     </div>
                     <div className="input-group">
@@ -124,8 +133,7 @@ const Login: React.FC = () => {
                             className="input-field"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                          autoComplete="new-password"
-                           
+                            autoComplete="new-password"
                         />
                     </div>
                     <button type="submit" className="auth-button">

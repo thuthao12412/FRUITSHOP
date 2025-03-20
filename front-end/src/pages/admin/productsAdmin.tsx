@@ -52,6 +52,11 @@ const ProductsAdmin: React.FC = () => {
         fetchProducts();
     }, []);
 
+    // Định dạng số tiền kèm VND
+    const formatPrice = (price: number): string => {
+        return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    };
+
     // Lấy sản phẩm của trang hiện tại
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -64,6 +69,11 @@ const ProductsAdmin: React.FC = () => {
     };
 
     const handleAddProduct = async () => {
+        if (newProduct.price <= 0) {
+            alert('Giá sản phẩm phải lớn hơn 0!');
+            return;
+        }
+
         try {
             const response = await axios.post('http://localhost:5000/products', newProduct);
             setProducts([...products, response.data]);
@@ -104,40 +114,43 @@ const ProductsAdmin: React.FC = () => {
             {error && <p className="error">{error}</p>}
 
             <div className="admin-grid">
-            <div className="add-product-section">
-    <h2>Thêm Sản Phẩm</h2>
-    <input
-        type="text"
-        placeholder="Tên sản phẩm"
-        value={newProduct.name}
-        onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-    />
-    <input
-        type="number"
-        placeholder="Giá"
-        value={newProduct.price}
-        onChange={(e) => setNewProduct({ ...newProduct, price: parseInt(e.target.value) })}
-    />
-    <input
-        type="text"
-        placeholder="Danh mục"
-        value={newProduct.category}
-        onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
-    />
-    <textarea
-        placeholder="Mô tả sản phẩm"
-        value={newProduct.description}
-        onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-    />
-    <input
-        type="text"
-        placeholder="URL Hình Ảnh"
-        value={newProduct.imageUrl}
-        onChange={(e) => setNewProduct({ ...newProduct, imageUrl: e.target.value })}
-    />
-    <button onClick={handleAddProduct}>Thêm Sản Phẩm</button>
-</div>
-
+                <div className="add-product-section">
+                    <h2>Thêm Sản Phẩm</h2>
+                    <input
+                        type="text"
+                        placeholder="Tên sản phẩm"
+                        value={newProduct.name}
+                        onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                    />
+                    <input
+                        type="number"
+                        placeholder="Giá (VND)"
+                        value={newProduct.price}
+                        onChange={(e) => {
+                            const value = parseInt(e.target.value);
+                            setNewProduct({ ...newProduct, price: value >= 0 ? value : 0 }); // Không cho nhập giá âm
+                        }}
+                    />
+                    {newProduct.price > 0 && <p>Giá: {formatPrice(newProduct.price)}</p>}
+                    <input
+                        type="text"
+                        placeholder="Danh mục"
+                        value={newProduct.category}
+                        onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                    />
+                    <textarea
+                        placeholder="Mô tả sản phẩm"
+                        value={newProduct.description}
+                        onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+                    />
+                    <input
+                        type="text"
+                        placeholder="URL Hình Ảnh"
+                        value={newProduct.imageUrl}
+                        onChange={(e) => setNewProduct({ ...newProduct, imageUrl: e.target.value })}
+                    />
+                    <button onClick={handleAddProduct}>Thêm Sản Phẩm</button>
+                </div>
 
                 <div className="product-list-section">
                     <h2>Danh Sách Sản Phẩm</h2>
@@ -158,7 +171,7 @@ const ProductsAdmin: React.FC = () => {
                                         <img src={product.imageUrl} alt={product.name} className="product-image" />
                                     </td>
                                     <td>{product.name}</td>
-                                    <td>{product.price}</td>
+                                    <td>{formatPrice(product.price)}</td>
                                     <td>{product.category}</td>
                                     <td>
                                         <div className="action-buttons">
